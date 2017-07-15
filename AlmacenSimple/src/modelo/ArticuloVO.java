@@ -10,6 +10,7 @@ package modelo;
  * @author Daniela
  */
 public class ArticuloVO {
+    
     private int codigo;
     private String detalle;
     private String categoria;
@@ -58,7 +59,5 @@ public class ArticuloVO {
     public void setPrecioVenta(int PrecioVenta) {
         this.PrecioVenta = PrecioVenta;
     }
-    
-    
     
 }

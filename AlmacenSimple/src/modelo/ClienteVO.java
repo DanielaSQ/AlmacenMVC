@@ -10,6 +10,7 @@ package modelo;
  * @author Daniela
  */
 public class ClienteVO {
+    
     private String rut;
     private String nombre;
     private String direccion;
@@ -49,7 +50,5 @@ public class ClienteVO {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
-    
     
 }
