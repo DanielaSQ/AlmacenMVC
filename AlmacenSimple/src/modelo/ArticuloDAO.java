@@ -14,12 +14,15 @@ import java.util.ArrayList;
 public class ArticuloDAO {
     
     public boolean agregarArticulo(ArticuloVO artVO){
+        
+        
         return true;
     }
     
     public ArticuloVO obtenerArticuloPorCodigo(ArticuloVO artVO){
         int codigo = artVO.getCodigo();
         ArticuloVO articulo = new ArticuloVO();
+        
          
         return articulo;
     }
