@@ -16,6 +16,7 @@ public class VentanaListaArticulo extends javax.swing.JFrame {
      */
     public VentanaListaArticulo() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

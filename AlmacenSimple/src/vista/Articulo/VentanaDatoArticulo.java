@@ -17,6 +17,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     public VentanaDatoArticulo() {
         
         initComponents();
+        this.setLocationRelativeTo(null);
         //aca setear campos obtenidos del vo
         //txtCodigoArticulo.setText("ASDASDASD");
     }

@@ -16,6 +16,7 @@ public class VentanaTablaVenta extends javax.swing.JFrame {
      */
     public VentanaTablaVenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

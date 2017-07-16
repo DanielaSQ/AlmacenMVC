@@ -18,6 +18,7 @@ public class VentanaVenta extends javax.swing.JFrame {
      */
     public VentanaVenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

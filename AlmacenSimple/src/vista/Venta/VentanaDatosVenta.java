@@ -16,6 +16,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
      */
     public VentanaDatosVenta() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
