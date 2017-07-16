@@ -15,7 +15,10 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
      * Creates new form VentanaDatoArticulo
      */
     public VentanaDatoArticulo() {
+        
         initComponents();
+        //aca setear campos obtenidos del vo
+        //txtCodigoArticulo.setText("ASDASDASD");
     }
 
     /**
@@ -28,15 +31,15 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodigoA = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtDetalleA = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtCategoriaA = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtCantA = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtPrecioA = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         botonEditar = new javax.swing.JButton();
 
@@ -44,19 +47,33 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
 
         jLabel1.setText("Codigo de Articulo :");
 
+        txtCodigoA.setEditable(false);
+        txtCodigoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoAActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Detalle de Articulo :");
+
+        txtDetalleA.setEditable(false);
 
         jLabel3.setText("Categoria de Articulo :");
 
+        txtCategoriaA.setEditable(false);
+
         jLabel4.setText("Cantidad Existente de Articulo :");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtCantA.setEditable(false);
+        txtCantA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtCantAActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Precio de Articulo");
+
+        txtPrecioA.setEditable(false);
 
         jButton1.setText("ELIMINAR");
 
@@ -84,11 +101,11 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField3)
-                        .addComponent(jTextField4)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))
+                        .addComponent(txtCodigoA)
+                        .addComponent(txtDetalleA)
+                        .addComponent(txtCategoriaA)
+                        .addComponent(txtCantA)
+                        .addComponent(txtPrecioA, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,23 +114,23 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDetalleA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCategoriaA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCantA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPrecioA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -124,15 +141,19 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtCantAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantAActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtCantAActionPerformed
 
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
         VentanaEdicionArticulo edi = new VentanaEdicionArticulo();
         edi.setVisible(true);
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_botonEditarActionPerformed
+
+    private void txtCodigoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,6 +186,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaDatoArticulo().setVisible(true);
+                
             }
         });
     }
@@ -177,10 +199,10 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtCantA;
+    private javax.swing.JTextField txtCategoriaA;
+    private javax.swing.JTextField txtCodigoA;
+    private javax.swing.JTextField txtDetalleA;
+    private javax.swing.JTextField txtPrecioA;
     // End of variables declaration//GEN-END:variables
 }
