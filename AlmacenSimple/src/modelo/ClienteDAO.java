@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,16 +17,12 @@ import java.util.logging.Logger;
  * @author Daniela
  */
 public class ClienteDAO {
-    
-    public ClienteDAO(){
-        
-    }
 
     public boolean agregar(ClienteVO clienteVO){
         try {
-            Conexion conn = new Conexion(); //crea coneccion
+            Conexion conn = new Conexion();
             String sentencia = "";
-            Statement estatuto = conn.getConnection().createStatement(); //obtiene con
+            Statement estatuto = conn.getConnection().createStatement();
             
             sentencia += "INSERT INTO clientes VALUES ('"
                     + clienteVO.getRut()+ "', '"
@@ -53,7 +48,6 @@ public class ClienteDAO {
             String sentencia = "SELECT * FROM clientes WHERE rut=?";
             PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
             estatuto.setString(1, rut);
-            //String sentencia = "SELECT * FROM `clientes` WHERE rut='"+rut+"'";
             ResultSet resultado = estatuto.executeQuery();
             
             if (resultado.next()) {            
@@ -61,7 +55,6 @@ public class ClienteDAO {
                 clienteVO.setNombre(resultado.getString("nombre"));
                 clienteVO.setDireccion(resultado.getString("direccion"));
                 clienteVO.setTelefono(resultado.getString("telefono"));
-                //resultado.close();
             }            
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +69,7 @@ public class ClienteDAO {
             PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
             estatuto.setString(1, rut);
             int executeUpdateResult = estatuto.executeUpdate();
+            
             if(executeUpdateResult == 0){
                 return false;
             }

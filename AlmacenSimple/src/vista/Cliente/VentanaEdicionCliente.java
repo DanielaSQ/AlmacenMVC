@@ -211,4 +211,11 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtRutCli;
     private javax.swing.JTextField txtTelefonoCli;
     // End of variables declaration//GEN-END:variables
+
+    void pasarInformacion(String rut, String nombre, String direccion, String telefono) {
+        this.txtRutCli.setText(rut);
+        this.txtNombreCli.setText(nombre);
+        this.txtDireccionCli.setText(direccion);
+        this.txtTelefonoCli.setText(telefono);
+    }
 }

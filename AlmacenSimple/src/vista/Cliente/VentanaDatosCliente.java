@@ -148,8 +148,13 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
 
     private void botonEditarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarCliActionPerformed
         VentanaEdicionCliente edCli = new VentanaEdicionCliente();
+        //traspasar informacion a ventana de edicion
+        edCli.pasarInformacion(txtRutC.getText()
+                , txtNombreC.getText()
+                , txtDireccionC.getText()
+                , txtTelefonoC.getText());
         edCli.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_botonEditarCliActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
