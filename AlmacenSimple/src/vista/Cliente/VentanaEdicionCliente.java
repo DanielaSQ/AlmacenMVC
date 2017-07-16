@@ -21,6 +21,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
      */
     public VentanaEdicionCliente() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
