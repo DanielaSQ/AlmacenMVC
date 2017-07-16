@@ -5,6 +5,7 @@
  */
 package vista.Cliente;
 
+import javax.swing.JOptionPane;
 import vista.VentanaPrincipal;
 
 /**
@@ -31,7 +32,7 @@ public class VentanaCliente extends javax.swing.JFrame {
 
         botonVolver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtRut = new javax.swing.JTextField();
         botonListarCliente = new javax.swing.JButton();
         botonBuscarCliente = new javax.swing.JButton();
         botonAgregarCliente = new javax.swing.JButton();
@@ -82,7 +83,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 35, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -104,7 +105,7 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonListarCliente)
@@ -119,8 +120,18 @@ public class VentanaCliente extends javax.swing.JFrame {
 
     private void botonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarClienteActionPerformed
         VentanaDatosCliente vDatCliente = new VentanaDatosCliente();
-        vDatCliente.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        String rut = txtRut.getText().trim();
+        
+        if(rut == null || rut.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Error en el campo", "", JOptionPane.ERROR_MESSAGE);
+            txtRut.setText("");
+        }else{
+            vDatCliente.pasarRut(rut);
+            vDatCliente.setVisible(true);
+            this.setVisible(false);
+        }
+        
+        // TODO add your handling code here:
     }//GEN-LAST:event_botonBuscarClienteActionPerformed
 
     private void botonAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarClienteActionPerformed
@@ -188,6 +199,6 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JButton botonListarCliente;
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtRut;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,11 +5,17 @@
  */
 package vista.Cliente;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.ClienteVO;
+
 /**
  *
  * @author Daniela
  */
 public class VentanaDatosCliente extends javax.swing.JFrame {
+
+    private Coordinador miCoordinador;
 
     /**
      * Creates new form VentanaDatos
@@ -35,7 +41,7 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
         txtDireccionC = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtTelefonoC = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         botonEditarCli = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +73,12 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
 
         txtTelefonoC.setEditable(false);
 
-        jButton1.setText("ELIMINAR");
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         botonEditarCli.setText("EDITAR");
         botonEditarCli.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +95,7 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addComponent(botonEditarCli))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +129,7 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
                 .addComponent(txtTelefonoC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnEliminar)
                     .addComponent(botonEditarCli))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -139,6 +150,20 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
         edCli.setVisible(true);
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_botonEditarCliActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        String rut = txtRutC.getText();
+        miCoordinador = new Coordinador();
+        boolean resultado = miCoordinador.eliminarCliente(rut);
+        if (resultado) {
+            JOptionPane.showMessageDialog(rootPane, "Cliente eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+            VentanaCliente vCliente = new VentanaCliente();
+            vCliente.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Cliente no se pudo eliminar", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +203,7 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEditarCli;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -188,4 +213,22 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtRutC;
     private javax.swing.JTextField txtTelefonoC;
     // End of variables declaration//GEN-END:variables
+
+    void pasarRut(String rut) {
+        miCoordinador = new Coordinador();
+        ClienteVO clienteVO = new ClienteVO();
+        clienteVO = miCoordinador.obtenerCliente(rut);
+
+        txtRutC.setText(clienteVO.getRut());
+        txtNombreC.setText(clienteVO.getNombre());
+        txtDireccionC.setText(clienteVO.getDireccion());
+        txtTelefonoC.setText(clienteVO.getTelefono());
+
+        if (txtNombreC.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "NO SE ENCONTRO CLIENTE", "", JOptionPane.ERROR_MESSAGE);
+            VentanaCliente vCliente = new VentanaCliente();
+            vCliente.setVisible(true);
+            this.dispose();
+        }
+    }
 }

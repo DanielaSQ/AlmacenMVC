@@ -5,12 +5,17 @@
  */
 package vista.Cliente;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.ClienteVO;
+
 /**
  *
  * @author Daniela
  */
 public class VentanaEdicionCliente extends javax.swing.JFrame {
 
+    private Coordinador miCoordinador;
     /**
      * Creates new form VentanaEdicionCliente
      */
@@ -37,7 +42,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtTelefonoCli = new javax.swing.JTextField();
         btCancelar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -59,7 +64,12 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("GUARDAR");
+        botonGuardar.setText("GUARDAR");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -81,7 +91,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(btCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(botonGuardar)
                 .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
@@ -106,7 +116,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancelar)
-                    .addComponent(jButton2))
+                    .addComponent(botonGuardar))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -116,8 +126,41 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         VentanaCliente ventanita = new VentanaCliente();
         ventanita.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        ClienteVO clienteVO = new ClienteVO();
+        miCoordinador = new Coordinador();
+        
+        String rut = txtRutCli.getText().trim();
+        String nombre = txtNombreCli.getText().trim();
+        String direccion = txtDireccionCli.getText().trim();
+        String telefono = txtTelefonoCli.getText().trim();
+        
+        clienteVO.setRut(rut);
+        clienteVO.setNombre(nombre);
+        clienteVO.setDireccion(direccion);
+        clienteVO.setTelefono(telefono);
+        
+        if((clienteVO.getRut() == null || clienteVO.getRut().equals(""))
+                || clienteVO.getNombre()== null || clienteVO.getNombre().equals("")
+                || clienteVO.getDireccion()== null || clienteVO.getDireccion().equals("")
+                || clienteVO.getTelefono()== null || clienteVO.getTelefono().equals("")){
+            
+            JOptionPane.showMessageDialog(rootPane, "Error en los campos", "", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(miCoordinador.agregarCliente(clienteVO)){
+                JOptionPane.showMessageDialog(rootPane, "Cliente agregado","", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Cliente no se pudo agregar", "", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        VentanaCliente ventanita = new VentanaCliente();
+        ventanita.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,8 +198,8 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonGuardar;
     private javax.swing.JButton btCancelar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

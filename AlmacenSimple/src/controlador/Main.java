@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import vista.VentanaPrincipal;
+
 /**
  *
  * @author Daniela
@@ -15,7 +17,13 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Main main = new Main();
+        main.iniciar();
+    }
+
+    private void iniciar() {
+        VentanaPrincipal vPrincipal = new VentanaPrincipal();
+        vPrincipal.setVisible(true);
     }
     
 }

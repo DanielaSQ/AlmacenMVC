@@ -5,7 +5,13 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,35 +19,69 @@ import java.util.ArrayList;
  */
 public class ClienteDAO {
     
-    public boolean agregarCliente(ArticuloVO artVO){
+    public ClienteDAO(){
         
-        return true;
     }
-    
-    
-    public ClienteVO obtenerClientePorRut(ClienteVO cliVO){
-        String rut = cliVO.getRut();
-        ClienteVO cliente = new ClienteVO();
-         
-        return cliente;
+
+    public boolean agregar(ClienteVO clienteVO){
+        try {
+            Conexion conn = new Conexion(); //crea coneccion
+            String sentencia = "";
+            Statement estatuto = conn.getConnection().createStatement(); //obtiene con
+            
+            sentencia += "INSERT INTO clientes VALUES ('"
+                    + clienteVO.getRut()+ "', '"
+                    + clienteVO.getNombre()+ "', '"
+                    + clienteVO.getDireccion()+ "', '"
+                    + clienteVO.getTelefono()+ "')";
+            
+            estatuto.execute(sentencia);
+            
+            return true; 
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
-    
-    
-    public ArrayList<ClienteVO>obtenerCliente(){
-      ArrayList<ClienteVO> lista = new ArrayList<>();
-      
-      return lista;
+
+
+    public ClienteVO obtenerPorRut(String rut) {
+        ClienteVO clienteVO = new ClienteVO();
+        
+        try {
+            Conexion conn = new Conexion();
+            String sentencia = "SELECT * FROM clientes WHERE rut=?";
+            PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
+            estatuto.setString(1, rut);
+            //String sentencia = "SELECT * FROM `clientes` WHERE rut='"+rut+"'";
+            ResultSet resultado = estatuto.executeQuery();
+            
+            if (resultado.next()) {            
+                clienteVO.setRut(resultado.getString("rut"));
+                clienteVO.setNombre(resultado.getString("nombre"));
+                clienteVO.setDireccion(resultado.getString("direccion"));
+                clienteVO.setTelefono(resultado.getString("telefono"));
+                //resultado.close();
+            }            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return clienteVO;
     }
-    
-    
-    public ClienteVO actualizarCliente(ClienteVO cliVO ){
-        ClienteVO cliente = new ClienteVO();
-       
-        return cliente;
-    }
-    
-    
-    public boolean borrarCliente(ClienteVO artVO){
+
+    public boolean eliminarPorRut(String rut) {
+        try {
+            Conexion conn = new Conexion();
+            String sentencia = "DELETE FROM clientes WHERE rut=?";
+            PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
+            estatuto.setString(1, rut);
+            int executeUpdateResult = estatuto.executeUpdate();
+            if(executeUpdateResult == 0){
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 }
