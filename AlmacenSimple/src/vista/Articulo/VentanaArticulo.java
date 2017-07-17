@@ -130,16 +130,19 @@ public class VentanaArticulo extends javax.swing.JFrame {
 
     private void BotonBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarArticuloActionPerformed
         VentanaDatoArticulo vDatArticulo = new VentanaDatoArticulo();
-        int codigo = Integer.parseInt(txtCodigo.getText().trim());
-        
-        if(codigo <= 0 ){
-            JOptionPane.showMessageDialog(rootPane, "Error en el campo", "", JOptionPane.ERROR_MESSAGE);
-            txtCodigo.setText("");
-        }else{
+        int codigo;
+        try{
+            codigo = Integer.parseInt(txtCodigo.getText().trim());
             vDatArticulo.pasarCodigo(codigo);
-            vDatArticulo.setVisible(true);
+            //vDatArticulo.setVisible(true);
             this.setVisible(false);
-        }        
+        }catch(NumberFormatException e){
+            txtCodigo.setText("");
+            JOptionPane.showMessageDialog(rootPane, "El dato no es un numero", "", JOptionPane.ERROR_MESSAGE);
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(rootPane, "Error de dato", "", JOptionPane.ERROR_MESSAGE);
+            txtCodigo.setText("");
+        }
     }//GEN-LAST:event_BotonBuscarArticuloActionPerformed
 
     private void BotonAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarArticuloActionPerformed

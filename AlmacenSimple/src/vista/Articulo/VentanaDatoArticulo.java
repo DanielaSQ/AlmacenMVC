@@ -8,10 +8,6 @@ package vista.Articulo;
 import controlador.Coordinador;
 import javax.swing.JOptionPane;
 import modelo.ArticuloVO;
-import modelo.ClienteVO;
-import vista.Cliente.VentanaCliente;
-import vista.Cliente.VentanaEdicionCliente;
-import vista.Venta.VentanaVenta;
 
 /**
  *
@@ -23,7 +19,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
      * Creates new form VentanaDatoArticulo
      */
     public VentanaDatoArticulo() {
-        
+
         initComponents();
         this.setLocationRelativeTo(null);
         //aca setear campos obtenidos del vo
@@ -161,20 +157,16 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
 
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
         VentanaEdicionArticulo edArt = new VentanaEdicionArticulo();
-        
+
         edArt.ocultarBotonGuardar();
-        edArt.pasarInformacionA(Integer.parseInt(txtCodigoA.getText())
-                , txtDetalleA.getText()
-                , txtCategoriaA.getText()
-                , Integer.parseInt(txtCantA.getText())
-                , Integer.parseInt(txtPrecioA.getText()));
-        
+        edArt.pasarInformacionA(Integer.parseInt(txtCodigoA.getText()), txtDetalleA.getText(), txtCategoriaA.getText(), Integer.parseInt(txtCantA.getText()), Integer.parseInt(txtPrecioA.getText()));
+
         edArt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonEditarActionPerformed
 
     private void txtCodigoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAActionPerformed
-        
+
     }//GEN-LAST:event_txtCodigoAActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
@@ -222,27 +214,29 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaDatoArticulo().setVisible(true);
-                
+
             }
         });
     }
-    
+
     void pasarCodigo(int codigo) {
         Coordinador miCoordinador = new Coordinador();
         ArticuloVO articuloVO = new ArticuloVO();
-        articuloVO = miCoordinador.obtenerArticulo(codigo);        
-        
-        txtCodigoA.setText(articuloVO.getCodigo()+"");
-        txtDetalleA.setText(articuloVO.getDetalle());
-        txtCategoriaA.setText(articuloVO.getCategoria());
-        txtCantA.setText(articuloVO.getCantidadExistente()+"");
-        txtPrecioA.setText(articuloVO.getPrecioVenta()+"");
-                
-        if ( txtDetalleA == null || txtDetalleA.getText().equals("")) {
+        articuloVO = miCoordinador.obtenerArticulo(codigo);
+
+        //si no encuentra articulo
+        if (articuloVO == null || articuloVO.getDetalle().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "NO SE ENCONTRO ARTICULO", "", JOptionPane.ERROR_MESSAGE);
-            VentanaArticulo vArticulo = new VentanaArticulo();
-            vArticulo.setVisible(true);
-            this.dispose();
+            this.setVisible(false);
+            VentanaArticulo vArt = new VentanaArticulo();
+            vArt.setVisible(true);
+        } else {
+            txtCodigoA.setText(articuloVO.getCodigo() + "");
+            txtDetalleA.setText(articuloVO.getDetalle());
+            txtCategoriaA.setText(articuloVO.getCategoria());
+            txtCantA.setText(articuloVO.getCantidadExistente() + "");
+            txtPrecioA.setText(articuloVO.getPrecioVenta() + "");
+            this.setVisible(true);
         }
     }
 
@@ -261,4 +255,3 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioA;
     // End of variables declaration//GEN-END:variables
 }
-

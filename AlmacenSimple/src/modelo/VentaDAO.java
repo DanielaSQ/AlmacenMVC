@@ -22,16 +22,30 @@ public class VentaDAO {
        try {
             Conexion conn = new Conexion();
             String sentencia = "";
+            String sentenciaArticulos = "";//para actualizar existencias
             Statement estatuto = conn.getConnection().createStatement();
-            
-            sentencia += "INSERT INTO venta VALUES ('"
+                        
+            sentencia += "INSERT INTO ventas VALUES ('"
                     + venVO.getNroDocto()+ "', '"
                     + venVO.getFecha()+ "', '"
                     + venVO.getRut()+ "', '"
                     + venVO.getCodigoArticulo()+ "', '"
                     + venVO.getCantidad()+ "')";
-            
             estatuto.execute(sentencia);
+                        
+            //calcular cantidad restante
+            ArticuloDAO articuloDAO = new ArticuloDAO();
+            ArticuloVO articuloVO = new ArticuloVO();
+            articuloVO = articuloDAO.obtenerArticuloPorCodigo(venVO.getCodigoArticulo());
+            int totalRestante = articuloVO.getCantidadExistente() - venVO.getCantidad();
+            
+            //actualizar existencias en BD
+            sentenciaArticulos += "UPDATE articulo SET cantidad_existencia=? "
+                    + "WHERE codigo=?";
+            PreparedStatement estatutoArticulos = conn.getConnection().prepareStatement(sentenciaArticulos);
+            estatutoArticulos.setInt(1, totalRestante);
+            estatutoArticulos.setInt(2, venVO.getCodigoArticulo());            
+            estatutoArticulos.executeUpdate();
             
             return true; 
         } catch (SQLException ex) {
@@ -62,20 +76,12 @@ public class VentaDAO {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ventaVO;
-    }
-    
-    
-    public VentaVO actualizarVenta(VentaVO venVO ){
-        VentaVO venta = new VentaVO();
-       
-        return venta;
-    }
-    
+    }    
     
     public boolean eliminarVenta(int nroDocto){
         try {
             Conexion conn = new Conexion();
-            String sentencia = "DELETE FROM ventas WHERE nroDocto=?";
+            String sentencia = "DELETE FROM ventas WHERE nro_docto=?";
             PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
             estatuto.setInt(1,nroDocto);
             int executeUpdateResult = estatuto.executeUpdate();

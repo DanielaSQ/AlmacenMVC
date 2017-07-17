@@ -7,6 +7,7 @@ package vista.Venta;
 
 import controlador.Coordinador;
 import javax.swing.JOptionPane;
+import modelo.ArticuloVO;
 import modelo.VentaVO;
 
 /**
@@ -51,7 +52,6 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
 
         jLabel1.setText("Numero Documento de Venta :");
 
-        txtNumVen.setEditable(false);
         txtNumVen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumVenActionPerformed(evt);
@@ -162,41 +162,61 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         VentanaVenta ventas = new VentanaVenta();
         ventas.setVisible(true);
-        this.setVisible(false);
-// TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         VentaVO ventaVO = new VentaVO();
         Coordinador miCoordinador = new Coordinador();
-        
-        int nroDocto = Integer.parseInt(txtNumVen.getText().trim());
+
+        int nroDocto = Integer.parseInt(txtNumVen.getText());
         String fecha = txtFechaVen.getText().trim();
         String rut = txtRutVen.getText().trim();
-        int codigoArticulo = Integer.parseInt(txtCodigoVen.getText().trim());
-        int cantidad = Integer.parseInt(txtCantidadVen.getText().trim());
-        
+        int codigoArticulo = Integer.parseInt(txtCodigoVen.getText());
+        int cantidadCompra = Integer.parseInt(txtCantidadVen.getText());
+
         ventaVO.setNroDocto(nroDocto);
         ventaVO.setFecha(fecha);
         ventaVO.setRut(rut);
         ventaVO.setCodigoArticulo(codigoArticulo);
-        ventaVO.setCantidad(cantidad);
-        
-        if((ventaVO.getNroDocto() <= 0)
-                || ventaVO.getFecha()== null || ventaVO.getFecha().equals("")
-                || ventaVO.getRut()== null || ventaVO.getRut().equals("")
+        ventaVO.setCantidad(cantidadCompra);
+
+        //verificar entrada de datos nulos
+        if ((ventaVO.getNroDocto() <= 0)
+                || ventaVO.getFecha() == null || ventaVO.getFecha().equals("")
+                || ventaVO.getRut() == null || ventaVO.getRut().equals("")
                 || (ventaVO.getCodigoArticulo() <= 0)
-                || (ventaVO.getCantidad() <= 0)){
-            
+                || (ventaVO.getCantidad() <= 0)) {
+
             JOptionPane.showMessageDialog(rootPane, "Error en los campos", "", JOptionPane.ERROR_MESSAGE);
-        }else{
-            if(miCoordinador.agregarVenta(ventaVO)){
-                JOptionPane.showMessageDialog(rootPane, "Venta agregada","", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Venta no se pudo agregar", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            //verificar articulo
+            ArticuloVO articuloComprado = new ArticuloVO();
+            articuloComprado = miCoordinador.obtenerArticulo(codigoArticulo);
+            //verificar existencias
+            if (articuloComprado.getCantidadExistente() >= 1) {
+                //verificar cantidad de compra sea menor o igual a existencias
+                if (cantidadCompra <= articuloComprado.getCantidadExistente()) {
+                    
+                    if (miCoordinador.agregarVenta(ventaVO)) { // <====//SE EFECTUA VENTA
+                        JOptionPane.showMessageDialog(rootPane, "Venta agregada", "", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Venta no se pudo agregar", "", JOptionPane.ERROR_MESSAGE);
+                        VentanaVenta ventas = new VentanaVenta();
+                        ventas.setVisible(true);
+                        this.dispose();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Cantidad de compras supera existencias", "", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "NO HAY EXISTENCIAS", "", JOptionPane.ERROR_MESSAGE);
+                VentanaVenta ventas = new VentanaVenta();
+                ventas.setVisible(true);
+                this.dispose();
             }
         }
-        
+
         VentanaVenta ventanita = new VentanaVenta();
         ventanita.setVisible(true);
         this.dispose();
@@ -244,16 +264,16 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
             }
         });
     }
-    
+
     void pasarInformacion(int nroDocto, String fecha, String rut, int codigoArticulo, int cantidad) {
-        this.txtNumVen.setText(nroDocto+"");
+        this.txtNumVen.setText(nroDocto + "");
         this.txtFechaVen.setText(fecha);
         this.txtRutVen.setText(rut);
-        this.txtCodigoVen.setText(codigoArticulo+"");
-        this.txtCantidadVen.setText(cantidad+"");        
+        this.txtCodigoVen.setText(codigoArticulo + "");
+        this.txtCantidadVen.setText(cantidad + "");
     }
-    
-    void ocultarBotonActualizar(){
+
+    void ocultarBotonActualizar() {
         this.botonActualizar.setVisible(false);
         this.botonGuardar.setVisible(true);
     }

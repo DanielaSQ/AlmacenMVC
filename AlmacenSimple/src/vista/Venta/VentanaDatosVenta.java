@@ -165,7 +165,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         int nroDocto = Integer.parseInt(txtNroDocto.getText());
-        Coordinador miCoordinador = new Coordinador();
+        miCoordinador = new Coordinador();
         boolean resultado = miCoordinador.eliminarVenta(nroDocto);
         if (resultado) {
             JOptionPane.showMessageDialog(rootPane, "Venta eliminada", "", JOptionPane.INFORMATION_MESSAGE);
