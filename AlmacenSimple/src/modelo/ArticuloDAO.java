@@ -56,7 +56,7 @@ public class ArticuloDAO {
                 articuloVO.setCodigo(resultado.getInt("codigo"));
                 articuloVO.setDetalle(resultado.getString("detalle"));
                 articuloVO.setCategoria(resultado.getString("categoria"));
-                articuloVO.setCantidadExistente(resultado.getInt("cantidadExistente"));
+                articuloVO.setCantidadExistente(resultado.getInt("cantidadExistencia"));
                 articuloVO.setPrecioVenta(resultado.getInt("precioVenta"));
             }            
         } catch (SQLException ex) {

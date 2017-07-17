@@ -50,6 +50,12 @@ public class VentanaCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Buscar por Rut Cliente:");
 
+        txtRut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRutActionPerformed(evt);
+            }
+        });
+
         botonListarCliente.setText("LISTAR");
         botonListarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +161,10 @@ public class VentanaCliente extends javax.swing.JFrame {
         vP.setVisible(true);
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_botonVolverActionPerformed
+
+    private void txtRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRutActionPerformed
 
     /**
      * @param args the command line arguments

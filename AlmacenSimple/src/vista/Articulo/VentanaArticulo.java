@@ -5,6 +5,7 @@
  */
 package vista.Articulo;
 
+import javax.swing.JOptionPane;
 import vista.VentanaPrincipal;
 
 /**
@@ -32,7 +33,7 @@ public class VentanaArticulo extends javax.swing.JFrame {
 
         btVolverA = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         botonListaArticulo = new javax.swing.JButton();
         BotonBuscarArticulo = new javax.swing.JButton();
         BotonAgregarArticulo = new javax.swing.JButton();
@@ -84,7 +85,7 @@ public class VentanaArticulo extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,7 +107,7 @@ public class VentanaArticulo extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,9 +129,17 @@ public class VentanaArticulo extends javax.swing.JFrame {
     }//GEN-LAST:event_btVolverAActionPerformed
 
     private void BotonBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarArticuloActionPerformed
-        VentanaDatoArticulo vD = new VentanaDatoArticulo();
-        vD.setVisible(true);
-        this.setVisible(false);
+        VentanaDatoArticulo vDatArticulo = new VentanaDatoArticulo();
+        int codigo = Integer.parseInt(txtCodigo.getText().trim());
+        
+        if(codigo <= 0 ){
+            JOptionPane.showMessageDialog(rootPane, "Error en el campo", "", JOptionPane.ERROR_MESSAGE);
+            txtCodigo.setText("");
+        }else{
+            vDatArticulo.pasarCodigo(codigo);
+            vDatArticulo.setVisible(true);
+            this.setVisible(false);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonBuscarArticuloActionPerformed
 
@@ -188,6 +197,6 @@ public class VentanaArticulo extends javax.swing.JFrame {
     private javax.swing.JButton botonListaArticulo;
     private javax.swing.JButton btVolverA;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }

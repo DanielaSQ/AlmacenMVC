@@ -5,6 +5,7 @@
  */
 package vista.Venta;
 
+import javax.swing.JOptionPane;
 import vista.VentanaPrincipal;
 
 /**
@@ -32,7 +33,7 @@ public class VentanaVenta extends javax.swing.JFrame {
 
         botonVolverPrincipal = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtnum = new javax.swing.JTextField();
         botonListarVenta = new javax.swing.JButton();
         botonBuscarVenta = new javax.swing.JButton();
         botonAgregarVenta = new javax.swing.JButton();
@@ -90,7 +91,7 @@ public class VentanaVenta extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtnum, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(botonAgregarVenta)))
@@ -104,7 +105,7 @@ public class VentanaVenta extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonListarVenta)
@@ -131,9 +132,18 @@ public class VentanaVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAgregarVentaActionPerformed
 
     private void botonBuscarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarVentaActionPerformed
-        VentanaDatosVenta vDatoVenta = new VentanaDatosVenta();
-        vDatoVenta.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        VentanaDatosVenta vDatVenta = new VentanaDatosVenta();
+        int nroDocto = Integer.parseInt(txtnum.getText().trim());
+        System.out.println("jhgjvjvjh");
+        if(nroDocto <= 0){
+            JOptionPane.showMessageDialog(rootPane, "Error en el campo", "", JOptionPane.ERROR_MESSAGE);
+            txtnum.setText("");
+            
+        }else{
+            vDatVenta.pasarNumDocto(nroDocto);
+            vDatVenta.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_botonBuscarVentaActionPerformed
 
     private void botonListarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarVentaActionPerformed
@@ -184,6 +194,6 @@ public class VentanaVenta extends javax.swing.JFrame {
     private javax.swing.JButton botonListarVenta;
     private javax.swing.JButton botonVolverPrincipal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtnum;
     // End of variables declaration//GEN-END:variables
 }

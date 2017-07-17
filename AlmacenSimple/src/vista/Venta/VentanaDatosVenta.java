@@ -5,6 +5,10 @@
  */
 package vista.Venta;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.VentaVO;
+
 /**
  *
  * @author Daniela
@@ -38,7 +42,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
         txtCodigoV = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtCantidadV = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
         botonEditarVenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +73,12 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
 
         txtCantidadV.setEditable(false);
 
-        jButton1.setText("ELIMINAR");
+        botonEliminar.setText("ELIMINAR");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         botonEditarVenta.setText("EDITAR");
         botonEditarVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +107,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(botonEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEditarVenta)
                 .addGap(26, 26, 26))
@@ -128,7 +137,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
                 .addComponent(txtCantidadV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botonEliminar)
                     .addComponent(botonEditarVenta))
                 .addGap(28, 28, 28))
         );
@@ -141,10 +150,30 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumVActionPerformed
 
     private void botonEditarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarVentaActionPerformed
-        VentanaEdicionVenta vEdicionV = new VentanaEdicionVenta();
-        vEdicionV.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        VentanaEdicionVenta edVen = new VentanaEdicionVenta();
+        //traspasar informacion a ventana de edicion
+        edVen.pasarInformacion(Integer.parseInt(txtNumV.getText())
+                , txtFechaV.getText()
+                , txtRutV.getText()
+                , Integer.parseInt(txtCodigoV.getText())
+                , Integer.parseInt(txtCantidadV.getText()));
+        edVen.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonEditarVentaActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        int nroDocto = Integer.parseInt(txtNumV.getText());
+        Coordinador miCoordinador = new Coordinador();
+        boolean resultado = miCoordinador.eliminarVenta(nroDocto);
+        if (resultado) {
+            JOptionPane.showMessageDialog(rootPane, "Venta eliminada", "", JOptionPane.INFORMATION_MESSAGE);
+            VentanaVenta vVenta = new VentanaVenta();
+            vVenta.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Venta no se pudo eliminar", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,10 +209,30 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
             }
         });
     }
+    
+    void pasarNumDocto(int nroDocto) {
+        Coordinador miCoordinador = new Coordinador();
+        VentaVO ventaVO = new VentaVO();
+        ventaVO = miCoordinador.obtenerVenta(nroDocto);
 
+        ventaVO.setNroDocto(Integer.parseInt(txtNumV.getText()));
+        txtFechaV.setText(ventaVO.getFecha());
+        txtRutV.setText(ventaVO.getRut());
+        ventaVO.setCodigoArticulo(Integer.parseInt(txtCodigoV.getText()));
+        ventaVO.setCantidad(Integer.parseInt(txtCantidadV.getText()));
+
+        if (Integer.parseInt(txtNumV.getText()) <= 0){
+            JOptionPane.showMessageDialog(rootPane, "EL DATO ES ERRONEO", "", JOptionPane.ERROR_MESSAGE);
+            VentanaVenta vVenta = new VentanaVenta();
+            vVenta.setVisible(true);
+            this.dispose();
+        }
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEditarVenta;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -91,6 +91,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtRut">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRutActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botonListarCliente">
       <Properties>

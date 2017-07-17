@@ -5,6 +5,10 @@
  */
 package vista.Articulo;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.ArticuloVO;
+
 /**
  *
  * @author Daniela
@@ -39,7 +43,7 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtPrecioArt = new javax.swing.JTextField();
         botonCancelar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonGuardarA = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edicion de Articulo");
@@ -73,7 +77,12 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("GUARDAR");
+        botonGuardarA.setText("GUARDAR");
+        botonGuardarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarAActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +107,7 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(botonCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(botonGuardarA)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,7 +136,7 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCancelar)
-                    .addComponent(jButton2))
+                    .addComponent(botonGuardarA))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -147,6 +156,43 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
         vArti.setVisible(true);
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void botonGuardarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarAActionPerformed
+        ArticuloVO artVO = new ArticuloVO();
+        Coordinador miCoordinador = new Coordinador();
+
+        int codigo = Integer.parseInt(txtCodigoArt.getText().trim());
+        String detalle = txtDetalleArt.getText().trim();
+        String categoria = txtCategoriaArt.getText().trim();
+        int cantExistencia = Integer.parseInt(txtCantidadExistenteArt.getText().trim());
+        int precioVenta = Integer.parseInt(txtPrecioArt.getText().trim());
+
+        artVO.setCodigo(codigo);
+        artVO.setDetalle(detalle);
+        artVO.setCategoria(categoria);
+        artVO.setCantidadExistente(cantExistencia);
+        artVO.setPrecioVenta(precioVenta);
+
+        if ((artVO.getCodigo() <= 0
+                || artVO.getDetalle() == null || artVO.getDetalle().equals("")
+                || artVO.getCategoria() == null || artVO.getCategoria().equals("")
+                || artVO.getCantidadExistente() <= 0
+                || artVO.getPrecioVenta() <= 0)) {
+
+            JOptionPane.showMessageDialog(rootPane, "Error en los campos", "", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            if (miCoordinador.agregarArticulo(artVO)) {
+                JOptionPane.showMessageDialog(rootPane, "Articulo agregado", "", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Articulo no se pudo agregar", "", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        VentanaArticulo ventanita = new VentanaArticulo();
+        ventanita.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonGuardarAActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,9 +229,17 @@ public class VentanaEdicionArticulo extends javax.swing.JFrame {
         });
     }
 
+    void pasarInformacionA(int codigo, String detalle, String categoria, int cantidadExistencia, int precioVenta) {
+        this.txtCodigoArt.setText(codigo+"");
+        this.txtDetalleArt.setText(detalle);
+        this.txtCategoriaArt.setText(categoria);
+        this.txtCantidadExistenteArt.setText(cantidadExistencia+"");
+        this.txtPrecioArt.setText(precioVenta+"");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botonGuardarA;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

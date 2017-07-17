@@ -5,6 +5,14 @@
  */
 package vista.Articulo;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.ArticuloVO;
+import modelo.ClienteVO;
+import vista.Cliente.VentanaCliente;
+import vista.Cliente.VentanaEdicionCliente;
+import vista.Venta.VentanaVenta;
+
 /**
  *
  * @author Daniela
@@ -41,7 +49,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
         txtCantA = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPrecioA = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botonEliminar = new javax.swing.JButton();
         botonEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,7 +84,12 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
 
         txtPrecioA.setEditable(false);
 
-        jButton1.setText("ELIMINAR");
+        botonEliminar.setText("ELIMINAR");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarActionPerformed(evt);
+            }
+        });
 
         botonEditar.setText("EDITAR");
         botonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +106,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botonEliminar)
                         .addGap(66, 66, 66)
                         .addComponent(botonEditar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -134,7 +147,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
                 .addComponent(txtPrecioA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botonEliminar)
                     .addComponent(botonEditar))
                 .addGap(28, 28, 28))
         );
@@ -147,14 +160,34 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantAActionPerformed
 
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
-        VentanaEdicionArticulo edi = new VentanaEdicionArticulo();
-        edi.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        VentanaEdicionArticulo edArt = new VentanaEdicionArticulo();
+        //traspasar informacion a ventana de edicion
+        edArt.pasarInformacionA(Integer.parseInt(txtCodigoA.getText())
+                , txtDetalleA.getText()
+                , txtCategoriaA.getText()
+                , Integer.parseInt(txtCantA.getText())
+                , Integer.parseInt(txtPrecioA.getText()));
+        edArt.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonEditarActionPerformed
 
     private void txtCodigoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoAActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCodigoAActionPerformed
+
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        int codigo = Integer.parseInt(txtCodigoA.getText());
+        Coordinador miCoordinador = new Coordinador();
+        boolean resultado = miCoordinador.eliminarArticulo(codigo);
+        if (resultado) {
+            JOptionPane.showMessageDialog(rootPane, "Articulo eliminado", "", JOptionPane.INFORMATION_MESSAGE);
+            VentanaArticulo vArt = new VentanaArticulo();
+            vArt.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Articulo no se pudo eliminar", "", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_botonEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,10 +224,30 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
             }
         });
     }
+    
+    void pasarCodigo(int codigo) {
+        Coordinador miCoordinador = new Coordinador();
+        ArticuloVO articuloVO = new ArticuloVO();
+        articuloVO = miCoordinador.obtenerArticulo(codigo);
+        
+        
+        txtCodigoA.setText(articuloVO.getCodigo()+"");
+        txtDetalleA.setText(articuloVO.getDetalle());
+        txtCategoriaA.setText(articuloVO.getCategoria());
+        txtCantA.setText(articuloVO.getCantidadExistente()+"");
+        txtPrecioA.setText(articuloVO.getPrecioVenta()+"");
+                
+        if ( txtDetalleA == null || txtDetalleA.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "NO SE ENCONTRO ARTICULO", "", JOptionPane.ERROR_MESSAGE);
+            VentanaArticulo vArticulo = new VentanaArticulo();
+            vArticulo.setVisible(true);
+            this.dispose();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEditar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -207,3 +260,4 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     private javax.swing.JTextField txtPrecioA;
     // End of variables declaration//GEN-END:variables
 }
+

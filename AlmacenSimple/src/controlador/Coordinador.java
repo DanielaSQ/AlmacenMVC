@@ -5,8 +5,12 @@
  */
 package controlador;
 
+import modelo.ArticuloDAO;
+import modelo.ArticuloVO;
 import modelo.ClienteDAO;
 import modelo.ClienteVO;
+import modelo.VentaDAO;
+import modelo.VentaVO;
 
 /**
  *
@@ -28,6 +32,41 @@ public class Coordinador {
     public boolean eliminarCliente(String rut) {
         ClienteDAO clienteDAO = new ClienteDAO();
         return clienteDAO.eliminarPorRut(rut);
+    }
+    
+    
+    //METODOS DE ARTICULOS
+    public boolean agregarArticulo(ArticuloVO articuloVO) {
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        boolean resultado = articuloDAO.agregarArticulo(articuloVO); 
+        return resultado;
+    }
+    
+    public ArticuloVO obtenerArticulo(int codigo){
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        return articuloDAO.obtenerArticuloPorCodigo(codigo);
+    }
+
+    public boolean eliminarArticulo(int codigo) {
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        return articuloDAO.eliminarPorCodigo(codigo);
+    }
+    
+    
+    public boolean agregarVenta(VentaVO ventaVO) {
+        VentaDAO ventaDAO = new VentaDAO();
+        boolean resultado = ventaDAO.agregarVenta(ventaVO); 
+        return resultado;
+    }
+    
+    public VentaVO obtenerVenta(int nroDocto){
+        VentaDAO ventaDAO = new VentaDAO();
+        return ventaDAO.obtenerVentaporNro(nroDocto);
+    }
+
+    public boolean eliminarVenta( int nroDocto) {
+        VentaDAO ventaDAO = new VentaDAO();
+        return ventaDAO.eliminarVenta(nroDocto);
     }
     
 }

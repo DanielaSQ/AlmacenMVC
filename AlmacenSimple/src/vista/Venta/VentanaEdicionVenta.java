@@ -5,6 +5,10 @@
  */
 package vista.Venta;
 
+import controlador.Coordinador;
+import javax.swing.JOptionPane;
+import modelo.VentaVO;
+
 /**
  *
  * @author Daniela
@@ -46,6 +50,13 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
 
         jLabel1.setText("Numero Documento de Venta :");
 
+        txtNumVen.setEditable(false);
+        txtNumVen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumVenActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Fecha de Venta :");
 
         jLabel3.setText("Rut asociado a la Venta :");
@@ -59,6 +70,12 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
         jLabel4.setText("Codigo de Articulo de Vendido :");
 
         jLabel5.setText("Cantidad de Articulo Vendido :");
+
+        txtCantidadVen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadVenActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -144,8 +161,48 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void bnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnGuardarActionPerformed
-        // TODO add your handling code here:
+        VentaVO ventaVO = new VentaVO();
+        Coordinador miCoordinador = new Coordinador();
+        
+        int nroDocto = Integer.parseInt(txtNumVen.getText().trim());
+        String fecha = txtFechaVen.getText().trim();
+        String rut = txtRutVen.getText().trim();
+        int codigoArticulo = Integer.parseInt(txtCodigoVen.getText().trim());
+        int cantidad = Integer.parseInt(txtCantidadVen.getText().trim());
+        
+        ventaVO.setNroDocto(nroDocto);
+        ventaVO.setFecha(fecha);
+        ventaVO.setRut(rut);
+        ventaVO.setCodigoArticulo(codigoArticulo);
+        ventaVO.setCantidad(cantidad);
+        
+        if((ventaVO.getNroDocto() <= 0)
+                || ventaVO.getFecha()== null || ventaVO.getFecha().equals("")
+                || ventaVO.getRut()== null || ventaVO.getRut().equals("")
+                || (ventaVO.getCodigoArticulo() <= 0)
+                || (ventaVO.getCantidad() <= 0)){
+            
+            JOptionPane.showMessageDialog(rootPane, "Error en los campos", "", JOptionPane.ERROR_MESSAGE);
+        }else{
+            if(miCoordinador.agregarVenta(ventaVO)){
+                JOptionPane.showMessageDialog(rootPane, "Venta agregada","", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Venta no se pudo agregar", "", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        VentanaVenta ventanita = new VentanaVenta();
+        ventanita.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bnGuardarActionPerformed
+
+    private void txtNumVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumVenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumVenActionPerformed
+
+    private void txtCantidadVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadVenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadVenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +237,14 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
                 new VentanaEdicionVenta().setVisible(true);
             }
         });
+    }
+    
+    void pasarInformacion(int nroDocto, String fecha, String rut, int codigoArticulo, int cantidad) {
+        this.txtNumVen.setText(nroDocto+"");
+        this.txtFechaVen.setText(fecha);
+        this.txtRutVen.setText(rut);
+        this.txtCodigoVen.setText(codigoArticulo+"");
+        this.txtCantidadVen.setText(cantidad+"");        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

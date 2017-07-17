@@ -52,6 +52,12 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Rut Cliente :");
 
+        txtRutCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRutCliActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Nombre Cliente :");
 
         jLabel4.setText("Direccion Cliente :");
@@ -162,6 +168,10 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
         ventanita.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void txtRutCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutCliActionPerformed
+        
+    }//GEN-LAST:event_txtRutCliActionPerformed
 
     /**
      * @param args the command line arguments
