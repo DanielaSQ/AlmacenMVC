@@ -167,6 +167,8 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
                 , txtCategoriaA.getText()
                 , Integer.parseInt(txtCantA.getText())
                 , Integer.parseInt(txtPrecioA.getText()));
+        //edArt.setVisible(true);
+        edArt.ocultarBotonGuardar();
         edArt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonEditarActionPerformed

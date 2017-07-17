@@ -153,6 +153,7 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
                 , txtNombreC.getText()
                 , txtDireccionC.getText()
                 , txtTelefonoC.getText());
+        edCli.ocultarBotonGuardar();
         edCli.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonEditarCliActionPerformed

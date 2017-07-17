@@ -44,6 +44,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
         txtTelefonoCli = new javax.swing.JTextField();
         btCancelar = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
+        botonActualizar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -78,6 +79,13 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
             }
         });
 
+        botonActualizar.setText("ACTUALIZAR");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,7 +105,9 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(btCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonGuardar)
                 .addGap(18, 18, 18))
         );
@@ -123,7 +133,8 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCancelar)
-                    .addComponent(botonGuardar))
+                    .addComponent(botonGuardar)
+                    .addComponent(botonActualizar))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -137,6 +148,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        
         ClienteVO clienteVO = new ClienteVO();
         miCoordinador = new Coordinador();
         
@@ -172,6 +184,10 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     private void txtRutCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutCliActionPerformed
         
     }//GEN-LAST:event_txtRutCliActionPerformed
+
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +225,7 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonGuardar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JLabel jLabel1;
@@ -228,4 +245,15 @@ public class VentanaEdicionCliente extends javax.swing.JFrame {
         this.txtDireccionCli.setText(direccion);
         this.txtTelefonoCli.setText(telefono);
     }
+    
+    void ocultarBotonActualizar(){
+        this.botonActualizar.setVisible(false);
+        this.botonGuardar.setVisible(true);
+    }
+
+    void ocultarBotonGuardar() {
+        this.botonActualizar.setVisible(true);
+        this.botonGuardar.setVisible(false);
+    }
+        
 }

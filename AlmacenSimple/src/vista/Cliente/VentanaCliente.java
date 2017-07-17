@@ -143,6 +143,7 @@ public class VentanaCliente extends javax.swing.JFrame {
 
     private void botonAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarClienteActionPerformed
         VentanaEdicionCliente vEdCliente = new VentanaEdicionCliente();
+        vEdCliente.ocultarBotonActualizar();
         vEdCliente.setVisible(true);
         this.setVisible(false);
 

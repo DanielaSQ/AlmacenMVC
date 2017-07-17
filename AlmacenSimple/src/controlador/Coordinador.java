@@ -53,6 +53,8 @@ public class Coordinador {
     }
     
     
+    
+    
     public boolean agregarVenta(VentaVO ventaVO) {
         VentaDAO ventaDAO = new VentaDAO();
         boolean resultado = ventaDAO.agregarVenta(ventaVO); 
