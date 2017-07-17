@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,29 +46,22 @@ public class VentaDAO {
         
         try {
             Conexion conn = new Conexion();
-            String sentencia = "SELECT * FROM ventas WHERE nroDocto=?";
+            String sentencia = "SELECT * FROM ventas WHERE nro_docto=?";
             PreparedStatement estatuto = conn.getConnection().prepareStatement(sentencia);
             estatuto.setInt(1, nroDocto);
             ResultSet resultado = estatuto.executeQuery();
             
             if (resultado.next()) {            
-                ventaVO.setNroDocto(resultado.getInt("nroDocto"));
+                ventaVO.setNroDocto(resultado.getInt("nro_docto"));
                 ventaVO.setFecha(resultado.getString("fecha"));
                 ventaVO.setRut(resultado.getString("rut"));
-                ventaVO.setCodigoArticulo(resultado.getInt("codigoArticulo"));
+                ventaVO.setCodigoArticulo(resultado.getInt("codigo_articulo"));
                 ventaVO.setCantidad(resultado.getInt("cantidad"));
             }            
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ventaVO;
-    }
-    
-    
-    public ArrayList<VentaVO>obtenerVenta(){
-      ArrayList<VentaVO> lista = new ArrayList<>();
-      
-      return lista;
     }
     
     

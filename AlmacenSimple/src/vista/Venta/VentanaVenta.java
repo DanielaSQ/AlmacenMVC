@@ -127,6 +127,7 @@ public class VentanaVenta extends javax.swing.JFrame {
 
     private void botonAgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarVentaActionPerformed
         VentanaEdicionVenta vEdicionVenta = new VentanaEdicionVenta();
+        vEdicionVenta.ocultarBotonActualizar();
         vEdicionVenta.setVisible(true);
         this.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_botonAgregarVentaActionPerformed
@@ -134,11 +135,10 @@ public class VentanaVenta extends javax.swing.JFrame {
     private void botonBuscarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarVentaActionPerformed
         VentanaDatosVenta vDatVenta = new VentanaDatosVenta();
         int nroDocto = Integer.parseInt(txtnum.getText().trim());
-        System.out.println("jhgjvjvjh");
+        
         if(nroDocto <= 0){
             JOptionPane.showMessageDialog(rootPane, "Error en el campo", "", JOptionPane.ERROR_MESSAGE);
-            txtnum.setText("");
-            
+            txtnum.setText("");            
         }else{
             vDatVenta.pasarNumDocto(nroDocto);
             vDatVenta.setVisible(true);

@@ -15,6 +15,7 @@ import modelo.VentaVO;
  */
 public class VentanaDatosVenta extends javax.swing.JFrame {
 
+    private Coordinador miCoordinador;
     /**
      * Creates new form VentanaDatosVenta
      */
@@ -33,7 +34,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtNumV = new javax.swing.JTextField();
+        txtNroDocto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtFechaV = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -50,10 +51,10 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
 
         jLabel1.setText("Numero  Documento Venta :");
 
-        txtNumV.setEditable(false);
-        txtNumV.addActionListener(new java.awt.event.ActionListener() {
+        txtNroDocto.setEditable(false);
+        txtNroDocto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumVActionPerformed(evt);
+                txtNroDoctoActionPerformed(evt);
             }
         });
 
@@ -96,7 +97,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(txtNumV)
+                    .addComponent(txtNroDocto)
                     .addComponent(txtFechaV)
                     .addComponent(txtRutV)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -118,7 +119,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNroDocto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -145,14 +146,15 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNumVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumVActionPerformed
+    private void txtNroDoctoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNroDoctoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumVActionPerformed
+    }//GEN-LAST:event_txtNroDoctoActionPerformed
 
     private void botonEditarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarVentaActionPerformed
         VentanaEdicionVenta edVen = new VentanaEdicionVenta();
-        //traspasar informacion a ventana de edicion
-        edVen.pasarInformacion(Integer.parseInt(txtNumV.getText())
+        
+        edVen.ocultarBotonGuardar();
+        edVen.pasarInformacion(Integer.parseInt(txtNroDocto.getText())
                 , txtFechaV.getText()
                 , txtRutV.getText()
                 , Integer.parseInt(txtCodigoV.getText())
@@ -162,7 +164,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEditarVentaActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-        int nroDocto = Integer.parseInt(txtNumV.getText());
+        int nroDocto = Integer.parseInt(txtNroDocto.getText());
         Coordinador miCoordinador = new Coordinador();
         boolean resultado = miCoordinador.eliminarVenta(nroDocto);
         if (resultado) {
@@ -211,17 +213,17 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
     }
     
     void pasarNumDocto(int nroDocto) {
-        Coordinador miCoordinador = new Coordinador();
+        miCoordinador = new Coordinador();
         VentaVO ventaVO = new VentaVO();
         ventaVO = miCoordinador.obtenerVenta(nroDocto);
 
-        ventaVO.setNroDocto(Integer.parseInt(txtNumV.getText()));
+        txtNroDocto.setText(ventaVO.getCodigoArticulo()+"");
         txtFechaV.setText(ventaVO.getFecha());
         txtRutV.setText(ventaVO.getRut());
-        ventaVO.setCodigoArticulo(Integer.parseInt(txtCodigoV.getText()));
-        ventaVO.setCantidad(Integer.parseInt(txtCantidadV.getText()));
+        txtCantidadV.setText(ventaVO.getCantidad()+"");
+        txtCodigoV.setText(ventaVO.getCodigoArticulo()+"");        
 
-        if (Integer.parseInt(txtNumV.getText()) <= 0){
+        if (Integer.parseInt(txtNroDocto.getText()) <= 0){
             JOptionPane.showMessageDialog(rootPane, "EL DATO ES ERRONEO", "", JOptionPane.ERROR_MESSAGE);
             VentanaVenta vVenta = new VentanaVenta();
             vVenta.setVisible(true);
@@ -241,7 +243,7 @@ public class VentanaDatosVenta extends javax.swing.JFrame {
     private javax.swing.JTextField txtCantidadV;
     private javax.swing.JTextField txtCodigoV;
     private javax.swing.JTextField txtFechaV;
-    private javax.swing.JTextField txtNumV;
+    private javax.swing.JTextField txtNroDocto;
     private javax.swing.JTextField txtRutV;
     // End of variables declaration//GEN-END:variables
 }

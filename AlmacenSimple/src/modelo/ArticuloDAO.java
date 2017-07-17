@@ -56,8 +56,8 @@ public class ArticuloDAO {
                 articuloVO.setCodigo(resultado.getInt("codigo"));
                 articuloVO.setDetalle(resultado.getString("detalle"));
                 articuloVO.setCategoria(resultado.getString("categoria"));
-                articuloVO.setCantidadExistente(resultado.getInt("cantidadExistencia"));
-                articuloVO.setPrecioVenta(resultado.getInt("precioVenta"));
+                articuloVO.setCantidadExistente(resultado.getInt("cantidad_existencia"));
+                articuloVO.setPrecioVenta(resultado.getInt("precio_venta"));
             }            
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);

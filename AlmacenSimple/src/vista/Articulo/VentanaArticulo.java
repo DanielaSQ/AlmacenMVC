@@ -125,7 +125,7 @@ public class VentanaArticulo extends javax.swing.JFrame {
     private void btVolverAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVolverAActionPerformed
         VentanaPrincipal vPrin = new VentanaPrincipal();
         vPrin.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_btVolverAActionPerformed
 
     private void BotonBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBuscarArticuloActionPerformed
@@ -139,21 +139,21 @@ public class VentanaArticulo extends javax.swing.JFrame {
             vDatArticulo.pasarCodigo(codigo);
             vDatArticulo.setVisible(true);
             this.setVisible(false);
-        }
-        // TODO add your handling code here:
+        }        
     }//GEN-LAST:event_BotonBuscarArticuloActionPerformed
 
     private void BotonAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarArticuloActionPerformed
         VentanaEdicionArticulo vEdiArt = new VentanaEdicionArticulo();
+        vEdiArt.ocultarBotonActualizar();
         vEdiArt.setVisible(true);
-        this.setVisible(false);// TODO add your handling code here:
+        
+        this.setVisible(false);
     }//GEN-LAST:event_BotonAgregarArticuloActionPerformed
 
     private void botonListaArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaArticuloActionPerformed
         VentanaListaArticulo listaA = new VentanaListaArticulo();
         listaA.setVisible(true);
         this.setVisible(false);
-// TODO add your handling code here:
     }//GEN-LAST:event_botonListaArticuloActionPerformed
 
     /**

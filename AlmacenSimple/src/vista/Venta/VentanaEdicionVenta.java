@@ -43,7 +43,8 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtCantidadVen = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
-        bnGuardar = new javax.swing.JButton();
+        botonGuardar = new javax.swing.JButton();
+        botonActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edicion de las Ventas");
@@ -84,12 +85,14 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
             }
         });
 
-        bnGuardar.setText("GUARDAR");
-        bnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardar.setText("GUARDAR");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnGuardarActionPerformed(evt);
+                botonGuardarActionPerformed(evt);
             }
         });
+
+        botonActualizar.setText("ACTUALIZAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,8 +115,10 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(bnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonGuardar)
                 .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
@@ -142,7 +147,8 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(bnGuardar))
+                    .addComponent(botonGuardar)
+                    .addComponent(botonActualizar))
                 .addGap(18, 18, 18))
         );
 
@@ -160,7 +166,7 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void bnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnGuardarActionPerformed
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         VentaVO ventaVO = new VentaVO();
         Coordinador miCoordinador = new Coordinador();
         
@@ -194,7 +200,7 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
         VentanaVenta ventanita = new VentanaVenta();
         ventanita.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_bnGuardarActionPerformed
+    }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void txtNumVenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumVenActionPerformed
         // TODO add your handling code here:
@@ -246,9 +252,20 @@ public class VentanaEdicionVenta extends javax.swing.JFrame {
         this.txtCodigoVen.setText(codigoArticulo+"");
         this.txtCantidadVen.setText(cantidad+"");        
     }
+    
+    void ocultarBotonActualizar(){
+        this.botonActualizar.setVisible(false);
+        this.botonGuardar.setVisible(true);
+    }
+
+    void ocultarBotonGuardar() {
+        this.botonActualizar.setVisible(true);
+        this.botonGuardar.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bnGuardar;
+    private javax.swing.JButton botonActualizar;
+    private javax.swing.JButton botonGuardar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

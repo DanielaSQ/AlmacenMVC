@@ -18,6 +18,7 @@ import modelo.VentaVO;
  */
 public class Coordinador {
     
+    //Coordinar Clientes
     public boolean agregarCliente(ClienteVO clienteVO) {
         ClienteDAO clienteDAO = new ClienteDAO();
         boolean resultado = clienteDAO.agregar(clienteVO); 
@@ -35,7 +36,7 @@ public class Coordinador {
     }
     
     
-    //METODOS DE ARTICULOS
+    //Coordinar Articulos
     public boolean agregarArticulo(ArticuloVO articuloVO) {
         ArticuloDAO articuloDAO = new ArticuloDAO();
         boolean resultado = articuloDAO.agregarArticulo(articuloVO); 
@@ -52,9 +53,7 @@ public class Coordinador {
         return articuloDAO.eliminarPorCodigo(codigo);
     }
     
-    
-    
-    
+    //Coordinar Ventas
     public boolean agregarVenta(VentaVO ventaVO) {
         VentaDAO ventaDAO = new VentaDAO();
         boolean resultado = ventaDAO.agregarVenta(ventaVO); 

@@ -161,14 +161,14 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
 
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
         VentanaEdicionArticulo edArt = new VentanaEdicionArticulo();
-        //traspasar informacion a ventana de edicion
+        
+        edArt.ocultarBotonGuardar();
         edArt.pasarInformacionA(Integer.parseInt(txtCodigoA.getText())
                 , txtDetalleA.getText()
                 , txtCategoriaA.getText()
                 , Integer.parseInt(txtCantA.getText())
                 , Integer.parseInt(txtPrecioA.getText()));
-        //edArt.setVisible(true);
-        edArt.ocultarBotonGuardar();
+        
         edArt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonEditarActionPerformed
@@ -230,8 +230,7 @@ public class VentanaDatoArticulo extends javax.swing.JFrame {
     void pasarCodigo(int codigo) {
         Coordinador miCoordinador = new Coordinador();
         ArticuloVO articuloVO = new ArticuloVO();
-        articuloVO = miCoordinador.obtenerArticulo(codigo);
-        
+        articuloVO = miCoordinador.obtenerArticulo(codigo);        
         
         txtCodigoA.setText(articuloVO.getCodigo()+"");
         txtDetalleA.setText(articuloVO.getDetalle());
